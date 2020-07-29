@@ -19,4 +19,4 @@ rate = input("Enter Rate: ")
 r = float(rate)
 
 pay = computepay(h,r)
-print("Pay:",pay)
+print("Pay",pay)
