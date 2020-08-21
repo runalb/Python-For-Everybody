@@ -1,0 +1,28 @@
+import xml.etree.ElementTree as ET
+import urllib.request, urllib.parse, urllib.error
+import ssl
+
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
+
+#url = "http://py4e-data.dr-chuck.net/comments_853294.xml"
+url = input('Enter location: ')
+print("Retrieving",url)
+xml = urllib.request.urlopen(url).read()
+
+clen=len(xml)
+print("Retrieved", clen ,"characters")
+
+sum = 0
+temp = 0
+
+tree = ET.fromstring(xml)
+counts = tree.findall('.//count')
+for count in counts:
+    temp = temp + 1
+    #print(count.text)
+    sum = sum + int(count.text)
+
+print("Count:",temp)
+print("Sum:",sum)
