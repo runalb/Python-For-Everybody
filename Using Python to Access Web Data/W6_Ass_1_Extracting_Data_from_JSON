@@ -1,0 +1,34 @@
+import urllib.request, urllib.parse, urllib.error
+import json
+import ssl
+
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
+
+url = input("Enter Location: ")
+#url = "http://py4e-data.dr-chuck.net/comments_853295.json"
+print("Reteriving", url)
+
+uh = urllib.request.urlopen(url)
+data = uh.read().decode()
+print("Reteriving", len(data),"Characters")
+#print(data)
+
+try:
+    js = json.loads(data)
+
+except:
+    js = None
+
+count = 0
+sum = 0
+
+for x in js['comments']:
+    count = count + 1
+    sum = sum + x['count']
+
+print("Count:",count)
+print("Sum:",sum)
+
+
