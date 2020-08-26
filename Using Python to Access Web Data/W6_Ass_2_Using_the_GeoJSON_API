@@ -1,0 +1,21 @@
+import urllib.request, urllib.parse, urllib.error
+import json
+
+serviceurl = 'http://py4e-data.dr-chuck.net/json?key=42&'
+
+address = input("Enter location: ")
+#address = "University of Mumbai"
+
+url = serviceurl + urllib.parse.urlencode({"sensor":"false",'address': address})
+
+print("Reteriving",url)
+uh = urllib.request.urlopen(url)
+data = uh.read().decode()
+print("Reteriving", len(data),"Characters")
+#print(data)
+
+js = json.loads(data)
+#print(js)
+
+placeid = js["results"][0]['place_id']
+print("Place id", placeid)
